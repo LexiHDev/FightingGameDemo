@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://6i70pd4r8kfg"]
+
+[ext_resource type="Script" path="res://CharacterBody3D.gd" id="1_75wgr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3ivqs"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7w05s"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8utun"]
+size = Vector3(0.1, 2.5, 0.1)
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_75wgr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.144, 0)
+shape = SubResource("CapsuleShape3D_3ivqs")
+
+[node name="RayCast3D" type="RayCast3D" parent="CollisionShape3D"]
+target_position = Vector3(0, -1.2, 0)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.144198, 0)
+mesh = SubResource("CapsuleMesh_7w05s")
+
+[node name="CameraGimble" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.166286, 0.0634246)
+
+[node name="InnerGimble" type="Node3D" parent="CameraGimble"]
+
+[node name="Camera3D" type="Camera3D" parent="CameraGimble/InnerGimble"]
+transform = Transform3D(1, 8.3949e-15, 1.74846e-07, -2.39137e-08, 0.990603, 0.13677, -1.73203e-07, -0.13677, 0.990603, 0, 1.42848, 2.89524)
+fov = 85.9754
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.628137, 0, -0.695292)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Marker3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+mesh = SubResource("BoxMesh_8utun")

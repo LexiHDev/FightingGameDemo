@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://ddly6wr42w4av"]
+
+[ext_resource type="PackedScene" uid="uid://6i70pd4r8kfg" path="res://FighterTemplate.tscn" id="1_jerrc"]
+[ext_resource type="Texture2D" uid="uid://cgbmecl47ma0l" path="res://assets/placeholder/Dark/texture_03.png" id="2_avg7q"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2122"]
+albedo_texture = ExtResource("2_avg7q")
+uv1_scale = Vector3(25, 25, 25)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_42afe"]
+material = SubResource("StandardMaterial3D_l2122")
+size = Vector2(50, 50)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_krw3t"]
+rayleigh_color = Color(0.188235, 0.54902, 0.937255, 1)
+mie_coefficient = 0.0
+ground_color = Color(0.0666667, 0.0823529, 0.027451, 1)
+
+[sub_resource type="Sky" id="Sky_lxrps"]
+sky_material = SubResource("PhysicalSkyMaterial_krw3t")
+radiance_size = 1
+
+[sub_resource type="Environment" id="Environment_x2030"]
+background_mode = 2
+sky = SubResource("Sky_lxrps")
+ambient_light_source = 3
+ambient_light_color = Color(0.433981, 0.546011, 0.751625, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_younp"]
+left_to_right = 1.0
+size = Vector3(2, 1.5, 5)
+
+[node name="Base" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.857167, 0.417202, -0.302004, 0, 0.586372, 0.810042, 0.515038, 0.694341, -0.502619, 0, 0, 0)
+light_energy = 9.0
+shadow_enabled = true
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+use_collision = true
+mesh = SubResource("PlaneMesh_42afe")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_jerrc")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_x2030")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.92949, 0, 0)
+use_collision = true
+mesh = SubResource("PrismMesh_younp")
