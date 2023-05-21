@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://6i70pd4r8kfg"]
 
-[ext_resource type="Script" path="res://CharacterBody3D.gd" id="1_75wgr"]
+[ext_resource type="Script" path="res://FighterTemplate.cs" id="1_ulo5e"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3ivqs"]
 
@@ -11,7 +11,7 @@ size = Vector3(0.1, 2.5, 0.1)
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-script = ExtResource("1_75wgr")
+script = ExtResource("1_ulo5e")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.144, 0)
