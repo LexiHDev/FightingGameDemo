@@ -12,9 +12,16 @@ public partial class FighterTemplate : CharacterBody3D
     private Input.MouseModeEnum CharMouseMode = Input.MouseModeEnum.Captured;
     // Get the gravity from the project settings to be synced with RigidBody nodes.
     private float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
-    // Get the gimbals.
-    public Node3D innerGimbal = GetNode<Node3D>("InnerGimbal");
-    public Node3D outerGimbal = GetNode<Node3D>("CameraGimbal");
+    //  Gimbals.
+    public Node3D innerGimbal;
+    public Node3D outerGimbal;
+
+    // [ ON READY ]
+    public override void _Ready()
+    {
+        innerGimbal = GetNodeOrNull<Node3D>("CameraGimble/InnerGimble");
+        outerGimbal = GetNodeOrNull<Node3D>("CameraGimble");
+    }
 
 
     // [ METHODS ]
