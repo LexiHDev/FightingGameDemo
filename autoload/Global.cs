@@ -2,10 +2,14 @@ using Godot;
 using System;
 
 // Yoinked from https://docs.godotengine.org/en/stable/tutorials/scripting/singletons_autoload.html
+
 public partial class Global : Node
 {
     // [ FIELDS ]
     private Node CurrentScene { get; set; }
+
+    private float InputSensitivity { get; set; } = 3 / 3.14f;
+
 
     // [ METHODS ]
     public override void _Ready()

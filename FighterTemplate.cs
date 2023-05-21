@@ -13,6 +13,7 @@ public partial class FighterTemplate : CharacterBody3D
     //  Gimbals.
     public Node3D innerGimbal;
     public Node3D outerGimbal;
+    private Global global;
 
 
 
@@ -21,6 +22,7 @@ public partial class FighterTemplate : CharacterBody3D
     {
         innerGimbal = GetNodeOrNull<Node3D>("CameraGimble/InnerGimble");
         outerGimbal = GetNodeOrNull<Node3D>("CameraGimble");
+        global = GetNodeOrNull<Global>("/root/Global");
         Input.MouseMode = Input.MouseModeEnum.Captured;
     }
 
