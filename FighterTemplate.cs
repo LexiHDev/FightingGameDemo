@@ -8,27 +8,40 @@ public partial class FighterTemplate : CharacterBody3D
     private float Speed = 5.0f;
     [Export]
     private float JumpVelocity = 12.0f;
-    [Export(PropertyHint.Enum, "MOUSE_MODE_VISIBLE,MOUSE_MODE_HIDDEN, MOUSE_MODE_CAPTURED, MOUSE_MODE_CONFINED, MOUSE_MODE_CONFINED_HIDDEN")]
-    private Input.MouseModeEnum CharMouseMode = Input.MouseModeEnum.Captured;
     // Get the gravity from the project settings to be synced with RigidBody nodes.
     private float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
     //  Gimbals.
     public Node3D innerGimbal;
     public Node3D outerGimbal;
 
-    // [ ON READY ]
+
+
+    // [ OVERRIDES ]
     public override void _Ready()
     {
         innerGimbal = GetNodeOrNull<Node3D>("CameraGimble/InnerGimble");
         outerGimbal = GetNodeOrNull<Node3D>("CameraGimble");
+        Input.MouseMode = Input.MouseModeEnum.Captured;
     }
 
+    public override void _Input(InputEvent @event)
+    {
+        base._Input(@event);
+        if (@event.IsActionPressed("menu_e"))
+        {
+            Input.MouseMode = Input.MouseModeEnum.Visible;
+        }
+        else if (@event.IsActionPressed("click_e"))
+        {
+            Input.MouseMode = Input.MouseModeEnum.Captured;
+            GetViewport().SetInputAsHandled();
+        }
 
-    // [ METHODS ]
+    }
+
     public override void _PhysicsProcess(double delta)
     {
         Vector3 velocity = Velocity;
-
         // Add the gravity.
         if (!IsOnFloor())
             velocity.Y -= gravity * (float)delta;
@@ -37,8 +50,6 @@ public partial class FighterTemplate : CharacterBody3D
         if (Input.IsActionJustPressed("jump_e") && IsOnFloor())
             velocity.Y = JumpVelocity;
 
-        // Get the input direction and handle the movement/deceleration.
-        // As good practice, you should replace UI actions with custom gameplay actions.
         Vector2 inputDir = Input.GetVector("left_e", "right_e", "up_e", "down_e");
         Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
         if (direction != Vector3.Zero)
