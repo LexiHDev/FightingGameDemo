@@ -42,6 +42,7 @@ use_collision = true
 mesh = SubResource("PlaneMesh_42afe")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_jerrc")]
+JumpVelocity = 6.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_x2030")
