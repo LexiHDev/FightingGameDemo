@@ -5,7 +5,6 @@ extends CharacterBody3D
 @export var JUMP_VELOCITY: float = 6.0
 
 @export var mouse_mode: Input.MouseMode = Input.MOUSE_MODE_CAPTURED
-@export var rotation_speed: float = PI / 2.2
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
