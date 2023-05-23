@@ -8,7 +8,8 @@ public partial class Global : Node
     // [ FIELDS ]
     private Node CurrentScene { get; set; }
 
-    private float InputSensitivity { get; set; } = 3 / 3.14f;
+    [Export]
+    public float InputSensitivity { get; set; } = 0.005f / 3.14f;
 
 
     // [ METHODS ]
